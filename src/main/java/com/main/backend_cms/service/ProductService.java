@@ -21,7 +21,7 @@ public class ProductService {
     public String createProduct(Product product){
         if(product.getAmount() >= 0){
             productRepository.save(product);
-            return "Create success";
+            return "Create Success";
         }
         return "Create unsuccess";
     }
