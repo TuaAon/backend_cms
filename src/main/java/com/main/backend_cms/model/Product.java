@@ -22,12 +22,12 @@ public class Product {
     public Product() {
     }
 
-    public Product( String name, 
-                    Double price, 
-                    int amount, 
-                    String description, 
-                    String category, 
-                    String picture) {
+    public Product(String name,
+                   Double price,
+                   int amount,
+                   String description,
+                   String category,
+                   String picture) {
         this.name = name;
         this.price = price;
         this.amount = amount;

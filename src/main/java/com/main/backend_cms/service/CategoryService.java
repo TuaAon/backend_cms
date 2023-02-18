@@ -16,11 +16,13 @@ public class CategoryService {
         return  categoryRepository.findAll();
     }
 
-    public String createCategory(Category categories){
-        if (categories.getName() != null && !categoryRepository.findByName(categories.getName()).isPresent()){
-            categoryRepository.save(categories);
+    public String createCategory(Category category){
+        if (category.getName() != null && !categoryRepository.findByName(category.getName()).isPresent()){
+            categoryRepository.save(category);
             return "Create success";
         }
         return "Create fail";
     }
+
+
 }
