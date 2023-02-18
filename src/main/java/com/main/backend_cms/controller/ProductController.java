@@ -33,7 +33,7 @@ public class ProductController {
             if(data == "Create success"){
                 return ResponseEntity.status(200).body(data);
             } else {
-                return ResponseEntity.status(400).body("can't create product");
+                return ResponseEntity.status(400).body(data);
             }
         } catch (Exception e) {
             return ResponseEntity.status(500).body("server error");
