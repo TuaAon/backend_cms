@@ -1,11 +1,11 @@
 package com.main.backend_cms.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.main.backend_cms.model.Products;
 import com.main.backend_cms.service.ProductService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping(value = "/showProduct") //Mockup for testing
+    @GetMapping(value = "/showProduct") //Mockup for testing
     public ResponseEntity<?> getAllProduct(){
         try {
             return ResponseEntity.status(200).body(productService.getAllProducts());
@@ -27,10 +27,15 @@ public class ProductController {
         }
     }
 
-    @GetMapping(value="/createProduct")
-    public ResponseEntity<?> createProduct(@RequestBody Products products) {
+    @PostMapping(value="/createProduct")
+    public ResponseEntity<?> createProduct(@RequestBody Products product) {
         try {
-            return ResponseEntity.status(200).body("ok");
+            String data = productService.createProduct(product);
+            if(data == "Create success"){
+                return ResponseEntity.status(200).body(data);
+            } else {
+                return ResponseEntity.status(400).body("can't create product");
+            }
         } catch (Exception e) {
             return ResponseEntity.status(500).body("server error");
         }

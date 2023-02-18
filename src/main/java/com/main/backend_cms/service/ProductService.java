@@ -17,4 +17,12 @@ public class ProductService {
     public List<Products> getAllProducts(){
         return productRepository.findAll();
     }
+
+    public String createProduct(Products product){
+        if(product.getAmount() >= 0){
+            productRepository.save(product);
+            return "Create success";
+        }
+        return "Create unsuccess";
+    }
 }

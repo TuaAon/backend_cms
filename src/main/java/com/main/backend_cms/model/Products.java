@@ -11,8 +11,6 @@ import lombok.Data;
 public class Products {
     @Id
     private String id;
-
-    @Indexed(unique = true)
     private String name;
     
     private Double price;
