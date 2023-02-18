@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.main.backend_cms.model.Products;
+import com.main.backend_cms.model.Product;
 import com.main.backend_cms.repository.ProductRepository;
 
 @Service
@@ -14,14 +14,14 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
     
-    public List<Products> getAllProducts(){
+    public List<Product> getAllProducts(){
         return productRepository.findAll();
     }
 
-    public String createProduct(Products product){
+    public String createProduct(Product product){
         if(product.getAmount() >= 0){
             productRepository.save(product);
-            return "Create success";
+            return "Create Success";
         }
         return "Create unsuccess";
     }

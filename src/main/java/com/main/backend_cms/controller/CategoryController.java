@@ -1,6 +1,6 @@
 package com.main.backend_cms.controller;
 
-import com.main.backend_cms.model.Categories;
+import com.main.backend_cms.model.Category;
 import com.main.backend_cms.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class CategoryController {
     }
 
     @PostMapping(value = "/createCategory")
-    public ResponseEntity<?> createCategory(@RequestBody Categories categories){
+    public ResponseEntity<?> createCategory(@RequestBody Category categories){
         try{
             String output = categoryService.createCategory(categories);
             if (output == "Create success"){
