@@ -10,10 +10,10 @@ import com.main.backend_cms.repository.ProductRepository;
 
 @Service
 public class ProductService {
-
+    
     @Autowired
     private ProductRepository productRepository;
-
+    
     public List<Products> getAllProducts(){
         return productRepository.findAll();
     }

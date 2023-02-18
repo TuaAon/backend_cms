@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class ProductController {
-
     @Autowired
     private ProductService productService;
 
-    @GetMapping(value = "/showProduct") //Mockup for testing
+    @GetMapping(value = "/showProducts") //Mockup for testing
     public ResponseEntity<?> getAllProduct(){
         try {
             return ResponseEntity.status(200).body(productService.getAllProducts());

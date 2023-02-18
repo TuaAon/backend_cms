@@ -23,11 +23,11 @@ public class Products {
     public Products() {
     }
 
-    public Products(String name,
-                    Double price,
-                    int amount,
-                    String description,
-                    String category,
+    public Products( String name, 
+                    Double price, 
+                    int amount, 
+                    String description, 
+                    String category, 
                     String picture) {
         this.name = name;
         this.price = price;
