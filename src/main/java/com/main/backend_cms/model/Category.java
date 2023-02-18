@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 
 @Data
 @Document
-public class Categories {
+public class Category {
 
     @Id
     private String id;
@@ -15,10 +15,10 @@ public class Categories {
     @Indexed(unique = true)
     private String name;
 
-    public Categories() {
+    public Category() {
     }
 
-    public Categories(String name) {
+    public Category(String name) {
         this.name = name;
     }
 
