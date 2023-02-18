@@ -23,6 +23,6 @@ public class ProductService {
             productRepository.save(product);
             return "Create Success";
         }
-        return "Create unsuccess";
+        return "Create Failed";
     }
 }
