@@ -1,6 +1,7 @@
 package com.main.backend_cms.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
@@ -10,7 +11,10 @@ import lombok.Data;
 public class Product {
     @Id
     private String id;
+
+    @Indexed(unique = true)
     private String name;
+    
     private Double price;
     private int amount;
     private String description;
@@ -21,7 +25,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, Double price, int amount, String description, String category, String picture) {
+    public Product( String name, 
+                    Double price, 
+                    int amount, 
+                    String description, 
+                    String category, 
+                    String picture) {
         this.name = name;
         this.price = price;
         this.amount = amount;
