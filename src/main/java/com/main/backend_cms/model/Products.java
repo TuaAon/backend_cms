@@ -8,11 +8,9 @@ import lombok.Data;
 
 @Data
 @Document
-public class Product {
+public class Products {
     @Id
     private String id;
-
-    @Indexed(unique = true)
     private String name;
     
     private Double price;
@@ -22,10 +20,10 @@ public class Product {
     private String picture;
 
 
-    public Product() {
+    public Products() {
     }
 
-    public Product( String name, 
+    public Products( String name, 
                     Double price, 
                     int amount, 
                     String description, 
