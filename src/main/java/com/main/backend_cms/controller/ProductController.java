@@ -2,7 +2,7 @@ package com.main.backend_cms.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.main.backend_cms.model.Products;
+import com.main.backend_cms.model.Product;
 import com.main.backend_cms.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @PostMapping(value="/createProduct")
-    public ResponseEntity<?> createProduct(@RequestBody Products product) {
+    public ResponseEntity<?> createProduct(@RequestBody Product product) {
         try {
             String data = productService.createProduct(product);
             if(data == "Create success"){

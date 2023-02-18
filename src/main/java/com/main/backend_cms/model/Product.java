@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Document
-public class Products {
+public class Product {
     @Id
     private String id;
     private String name;
@@ -19,15 +19,15 @@ public class Products {
     private String picture;
 
 
-    public Products() {
+    public Product() {
     }
 
-    public Products( String name, 
-                    Double price, 
-                    int amount, 
-                    String description, 
-                    String category, 
-                    String picture) {
+    public Product(String name,
+                   Double price,
+                   int amount,
+                   String description,
+                   String category,
+                   String picture) {
         this.name = name;
         this.price = price;
         this.amount = amount;
