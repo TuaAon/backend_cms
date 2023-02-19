@@ -38,6 +38,9 @@ public class ProductService {
 
     public Product updateProduct(Product product) throws Exception{
         //TODO: implement update Product
-        return null;
+        if(productRepository.findById(product.getId()).isPresent()){
+            return productRepository.save(product);
+        }
+        throw new Exception("invalid data");
     }
 }
