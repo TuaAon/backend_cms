@@ -27,11 +27,7 @@ public class CategoryController {
 
     public ResponseEntity<?> createCategory(@RequestBody Category category){
         try{
-            String output = categoryService.createCategory(category);
-            if (output == "Create success"){
-                return ResponseEntity.status(200).body(output);
-            }
-            return ResponseEntity.status(400).body(output);
+            return ResponseEntity.status(200).body(category);
         } catch (Exception ex){
             return ResponseEntity.status(500).body("Error");
         }

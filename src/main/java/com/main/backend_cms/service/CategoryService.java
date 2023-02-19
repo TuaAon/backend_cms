@@ -13,15 +13,14 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     public List<Category> getAllCategory(){
-        return  categoryRepository.findAll();
+        return categoryRepository.findAll();
     }
 
-    public String createCategory(Category category){
+    public Category createCategory(Category category) throws Exception{
         if (category.getName() != null && !categoryRepository.findByName(category.getName()).isPresent()){
-            categoryRepository.save(category);
-            return "Create success";
+            return categoryRepository.save(category);
         }
-        return "Create fail";
+        throw new Exception("Error");
     }
 
 

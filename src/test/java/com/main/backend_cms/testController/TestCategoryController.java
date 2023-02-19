@@ -8,7 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -32,7 +31,7 @@ public class TestCategoryController {
 
     // GetMapping
     @Test
-    void should_return_product_correctly_list_when_call_allCategory(){
+    public void should_return_product_correctly_list_when_call_allCategory(){
         // Given
         Category category1 = new Category("Shirt");
         Category category2 = new Category("Hat");
@@ -47,7 +46,7 @@ public class TestCategoryController {
     }
 
     @Test
-    void should_return_status_200_when_call_allCategory_and_category_is_not_empty(){
+    public void should_return_status_200_when_call_allCategory_and_category_is_not_empty(){
         // Given
         // When
         ResponseEntity<?> result = categoryController.getAllCategory();
@@ -56,11 +55,27 @@ public class TestCategoryController {
     }
 
 //    @Test
-//    void should_return_error_when_call_allCategory_and_category_is_empyl(){
+//    void should_return_error_when_call_allCategory_and_category_is_empty(){
 //        List<Category> categories = null;
 //
 //        ResponseEntity<?> result = categoryController.getAllCategory();
 //
 //
+//    }
+
+    // PostMapping
+//    @Test
+//    public void should_return_status_200_when_call_createCategory_given_not_exist_name(){
+//        // Given
+//        MockHttpServletRequest request = new MockHttpServletRequest();
+//        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+//
+//        // When
+//        when(categoryService.createCategory(any(Category.class))).thenReturn(String.valueOf(true));
+//        Category categoryToAdd = new Category("Gloves");
+//        ResponseEntity<?> responseEntity = categoryController.createCategory(categoryToAdd);
+//
+//        // Then
+//        assertThat(responseEntity.getStatusCode()).isEqualTo(200);
 //    }
 }
