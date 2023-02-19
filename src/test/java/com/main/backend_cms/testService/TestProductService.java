@@ -164,6 +164,18 @@ public class TestProductService {
     }
 
     @Test
+    public void should_throw_exception_when_call_deleteProductByName_given_non_exits_productName() {
+        given(productRepository.findByName(product.getName())).willReturn(null);
+
+        assertThrows(
+                Exception.class, () -> {
+                    productService.deleteProductByName(product.getName());
+                });
+
+        verify(productRepository, never()).deleteByName(product.getName());
+    }
+
+    @Test
     public void should_return_product_when_call_updateProduct_given_product() throws Exception {
         given(productRepository.save(product)).willReturn(product);
         product.setName("skirt");
@@ -212,6 +224,18 @@ public class TestProductService {
     @Test
     public void should_throw_exception_when_call_updateProduct_given_product_with_exist_name() {
         given(productRepository.findByName(product.getName())).willReturn(Optional.of(product));
+
+        assertThrows(
+                Exception.class, () -> {
+                    productService.updateProduct(product);
+                });
+
+        verify(productRepository, never()).save(any(Product.class));
+    }
+
+    @Test
+    public void should_throw_exception_when_call_updateProduct_given_non_exits_product() {
+        given(productRepository.findByName(product.getName())).willReturn(null);
 
         assertThrows(
                 Exception.class, () -> {

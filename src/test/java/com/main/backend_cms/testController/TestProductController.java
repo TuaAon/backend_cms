@@ -9,25 +9,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class TestProductController {
@@ -49,7 +38,7 @@ public class TestProductController {
     }
 
     @Test
-    public void should_return_List_Product_when_call_getAllProducts_given_product() {
+    public void should_return_success_when_call_getAllProducts_given_product() {
         given(productService.getAllProducts()).willReturn(List.of(product));
 
         ResponseEntity<?> response = productController.getAllProducts();
@@ -60,7 +49,7 @@ public class TestProductController {
     }
 
     @Test
-    public void should_return_200_and_product_when_call_createProduct_given_product() throws Exception {
+    public void should_return_success_when_call_createProduct_given_product() throws Exception {
         given(productService.createProduct(product)).willReturn(product);
 
         ResponseEntity<?> response = productController.createProduct(product);
@@ -72,14 +61,52 @@ public class TestProductController {
     }
 
     @Test
-    public void should_return_400_and_product_when_call_createProduct_given_product() throws Exception {
-        given(productService.createProduct(product)).willReturn(product);
+    public void should_return_failed_when_call_createProduct_given_service_throw_exception() throws Exception {
+        given(productService.createProduct(product)).willThrow(Exception.class);
 
         ResponseEntity<?> response = productController.createProduct(product);
 
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+
+    }
+
+    @Test
+    public void should_return_success_when_call_deleteProductByName_given_productName() throws Exception {
+        given(productService.deleteProductByName(product.getName())).willReturn(product);
+
+        ResponseEntity<?> response = productController.deleteProductByName(product.getName());
+
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(product);
-        verify(productService).createProduct(product);
+        verify(productService).deleteProductByName(product.getName());
+    }
 
+    @Test
+    public void should_return_failed_when_call_deleteProductByName_given_service_throw_exception() throws Exception {
+        given(productService.deleteProductByName(product.getName())).willThrow(Exception.class);
+
+        ResponseEntity<?> response = productController.deleteProductByName(product.getName());
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+    }
+
+    @Test
+    public void should_return_success_when_call_updateProduct_given_product() throws Exception {
+        given(productService.updateProduct(product)).willReturn(product);
+
+        ResponseEntity<?> response = productController.updateProduct(product);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo(product);
+        verify(productService).updateProduct(product);
+    }
+
+    @Test
+    public void should_return_failed_when_call_updateProduct_given_service_throw_exception() throws Exception {
+        given(productService.updateProduct(product)).willThrow(Exception.class);
+
+        ResponseEntity<?> response = productController.updateProduct(product);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 }
