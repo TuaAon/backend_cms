@@ -18,11 +18,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public String createProduct(Product product){
+    public Product createProduct(Product product) throws Exception {
         if(product.getAmount() >= 0){
-            productRepository.save(product);
-            return "Create Success";
+            return productRepository.save(product);
         }
-        return "Create Failed";
+        throw new Exception("not ok");
     }
 }
