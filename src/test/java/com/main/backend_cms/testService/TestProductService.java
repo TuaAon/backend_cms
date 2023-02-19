@@ -38,7 +38,7 @@ public class TestProductService {
     }
 
     @Test
-    public void should_return_List_Product_when_call_getAllProducts_given_product() {
+    public void should_return_List_Products_when_call_getAllProducts_given_product() {
         given(productRepository.findAll()).willReturn(List.of(product));
 
         List<Product> products = productService.getAllProducts();
