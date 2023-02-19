@@ -25,9 +25,17 @@ public class CategoryController {
 
     @PostMapping(value = "/createCategory")
 
-    public ResponseEntity<?> createCategories(@RequestBody Category category){
+    public ResponseEntity<?> createCategory(@RequestBody Category category){
         try{
-            return ResponseEntity.status(200).body(categoryService.createCategories(category));
+            return ResponseEntity.status(200).body(categoryService.createCategory(category));
+        } catch (Exception ex){
+            return ResponseEntity.status(400).body("Error");
+        }
+    }
+
+    public ResponseEntity<?> updateCategory(@RequestBody Category category){
+        try {
+            return ResponseEntity.status(200).body(categoryService.updateCategory(category));
         } catch (Exception ex){
             return ResponseEntity.status(400).body("Error");
         }

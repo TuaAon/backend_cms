@@ -6,22 +6,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Category> getAllCategories(){
+    public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
 
-    public Category createCategories(Category category) throws Exception{
-        if (category.getName() != null && !categoryRepository.findByName(category.getName()).isPresent()){
+    public Category createCategory(Category category) throws Exception {
+        if (category.getName() != null && !categoryRepository.findByName(category.getName()).isPresent()) {
             return categoryRepository.save(category);
         }
         throw new Exception("Error");
     }
 
+    public Category updateCategory(Category category) throws Exception {
+        if (categoryRepository.findByName(category.getName()).isEmpty()) {
+            Optional<Category> updatedCategory = categoryRepository.findById(category.getId());
+            if (updatedCategory.isPresent()) {
+                return categoryRepository.save(updatedCategory.get());
+            }
+        }
+        throw new Exception("Error");
+    }
 
 }

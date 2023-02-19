@@ -70,24 +70,24 @@ public class TestCategoryController {
     @Test
     public void should_return_status_200_when_call_createCategory_given_not_exist_name() throws Exception {
         // Given
-        when(categoryService.createCategories(category1)).thenReturn(category1);
+        when(categoryService.createCategory(category1)).thenReturn(category1);
         // When
 
-        ResponseEntity<?> responseEntity = categoryController.createCategories(category1);
+        ResponseEntity<?> responseEntity = categoryController.createCategory(category1);
 
         // Then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isEqualTo(category1);
-        verify(categoryService).createCategories(category1);
+        verify(categoryService).createCategory(category1);
     }
 
     @Test
     public void should_return_status_400_when_call_createCategory_given_exception() throws Exception {
         // Given
-        when(categoryService.createCategories(category1)).thenThrow(Exception.class);
+        when(categoryService.createCategory(category1)).thenThrow(Exception.class);
         // When
 
-        ResponseEntity<?> responseEntity = categoryController.createCategories(category1);
+        ResponseEntity<?> responseEntity = categoryController.createCategory(category1);
 
         // Then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);

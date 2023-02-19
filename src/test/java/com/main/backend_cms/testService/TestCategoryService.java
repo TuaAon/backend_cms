@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -35,7 +37,7 @@ public class TestCategoryService {
     }
 
     @Test
-    public void should_return_category_when_call_getAllCategory_given_a_category(){
+    public void should_return_category_when_call_getAllCategory_given_a_category() {
         when(categoryRepository.findAll()).thenReturn(List.of(category));
         List<Category> categories = categoryService.getAllCategories();
 
@@ -46,33 +48,45 @@ public class TestCategoryService {
     @Test
     public void should_return_category_when_call_createCategory_given_a_category() throws Exception {
         when(categoryRepository.save(category)).thenReturn(category);
-        Category saveCategory = categoryService.createCategories(category);
+        Category saveCategory = categoryService.createCategory(category);
 
         assertThat(saveCategory).isNotNull();
         verify(categoryRepository).save(category);
     }
 
     @Test
-    public void should_return_throws_exception_when_call_createCategory_given_a_category_with_exist_name(){
+    public void should_return_throws_exception_when_call_createCategory_given_a_category_with_exist_name() {
         when(categoryRepository.findByName(category.getName())).thenReturn(Optional.of(category));
 
         org.junit.jupiter.api.Assertions.assertThrows(
                 Exception.class, () -> {
-                    categoryService.createCategories(category);
+                    categoryService.createCategory(category);
                 });
 
         verify(categoryRepository, never()).save(any(Category.class));
     }
 
     @Test
-    public void should_return_throws_exception_when_call_createCategory_given_a_category_with_null_name(){
+    public void should_return_throws_exception_when_call_createCategory_given_a_category_with_null_name() {
         category.setName(null);
 
         org.junit.jupiter.api.Assertions.assertThrows(
                 Exception.class, () -> {
-                    categoryService.createCategories(category);
+                    categoryService.createCategory(category);
                 });
 
         verify(categoryRepository, never()).save(any(Category.class));
+    }
+
+    @Test
+    public void should_return_updated_category_when_call_updateCategory_given_a_category_name() throws Exception {
+        when(categoryRepository.save(category)).thenReturn(category);
+        when(categoryRepository.findById(category.getId())).thenReturn(Optional.of(category));
+        Category updateCategory = categoryService.updateCategory(category);
+
+        assertThat(updateCategory).isNotNull();
+        assertThat(updateCategory.getName()).isEqualTo(category.getName());
+        verify(categoryRepository).save(updateCategory);
+
     }
 }
