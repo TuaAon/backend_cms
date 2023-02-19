@@ -179,22 +179,12 @@ public class TestProductService {
     @Test
     public void should_return_product_when_call_updateProduct_given_product() throws Exception {
         given(productRepository.save(product)).willReturn(product);
-        product.setName("skirt");
-        product.setPrice(55.55);
-        product.setAmount(20L);
-        product.setDescription("good skirt");
-        product.setCategory(new String[]{"2"});
-        product.setPicture("pic of skirt");
+        given(productRepository.findById(product.getId())).willReturn(Optional.of(product));
 
         Product updateProduct = productService.updateProduct(product);
 
         assertThat(updateProduct).isNotNull();
-        assertThat(updateProduct.getName()).isEqualTo("skirt");
-        assertThat(updateProduct.getPrice()).isEqualTo(55.55);
-        assertThat(updateProduct.getAmount()).isEqualTo(20L);
-        assertThat(updateProduct.getDescription()).isEqualTo("good skirt");
-        assertThat(updateProduct.getCategory()).isEqualTo(new String[]{"2"});
-        assertThat(updateProduct.getPicture()).isEqualTo("pic of skirt");
+        assertThat(updateProduct).isEqualTo(product);
         verify(productRepository).save(product);
     }
 
