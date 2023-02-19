@@ -17,7 +17,7 @@ public class CategoryService {
     }
 
     public String createCategory(Category category){
-        if (category.getName() != null && !categoryRepository.findByName(category.getName()).isPresent()){
+        if (category.getName() != null && categoryRepository.findByName(category.getName()).isEmpty()){
             categoryRepository.save(category);
             return "Create success";
         }
