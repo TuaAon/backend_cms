@@ -156,6 +156,7 @@ public class TestProductService {
     @Test
     public void should_return_product_when_call_deleteProductByName_given_productName() throws Exception {
         given(productRepository.deleteByName(product.getName())).willReturn(product);
+        given(productRepository.findByName(product.getName())).willReturn(Optional.of(product));
 
         Product deleteProduct = productService.deleteProductByName(product.getName());
 

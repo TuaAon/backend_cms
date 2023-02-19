@@ -1,12 +1,10 @@
 package com.main.backend_cms.controller;
 
-import org.springframework.web.bind.annotation.*;
-
 import com.main.backend_cms.model.Product;
 import com.main.backend_cms.service.ProductService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 

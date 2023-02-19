@@ -1,12 +1,11 @@
 package com.main.backend_cms.service;
 
-import java.util.List;
-
+import com.main.backend_cms.model.Product;
+import com.main.backend_cms.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.main.backend_cms.model.Product;
-import com.main.backend_cms.repository.ProductRepository;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -19,15 +18,22 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) throws Exception {
-        if(product.getAmount() >= 0){
+        if( product.getAmount() >= 0 &&
+            product.getPrice() >= 0 &&
+            !product.getName().isEmpty() &&
+            product.getCategory().length > 0 &&
+            !product.getPicture().isEmpty() &&
+            productRepository.findByName(product.getName()).isEmpty()){
             return productRepository.save(product);
         }
-        throw new Exception("not ok");
+        throw new Exception("invalid data");
     }
 
     public Product deleteProductByName(String name) throws Exception{ //hard-delete
-        //TODO: implement hard delete product by name
-        return null;
+        if(productRepository.findByName(name).isPresent()){
+            return productRepository.deleteByName(name);
+        }
+        throw new Exception("invalid data");
     }
 
     public Product updateProduct(Product product) throws Exception{
