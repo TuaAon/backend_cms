@@ -12,16 +12,15 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Category> getAllCategory(){
-        return  categoryRepository.findAll();
+    public List<Category> getAllCategories(){
+        return categoryRepository.findAll();
     }
 
-    public String createCategory(Category category){
-        if (category.getName() != null && categoryRepository.findByName(category.getName()).isEmpty()){
-            categoryRepository.save(category);
-            return "Create success";
+    public Category createCategories(Category category) throws Exception{
+        if (category.getName() != null && !categoryRepository.findByName(category.getName()).isPresent()){
+            return categoryRepository.save(category);
         }
-        return "Create fail";
+        throw new Exception("Error");
     }
 
 

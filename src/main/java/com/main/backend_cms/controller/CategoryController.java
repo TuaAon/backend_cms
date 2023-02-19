@@ -15,25 +15,21 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping(value = "/showCategory")
-    public ResponseEntity<?> getAllCategory(){
+    public ResponseEntity<?> getAllCategories(){
         try{
-            return ResponseEntity.status(200).body(categoryService.getAllCategory());
+            return ResponseEntity.status(200).body(categoryService.getAllCategories());
         } catch (Exception ex){
-            return ResponseEntity.status(500).body("Error");
+            return ResponseEntity.status(400).body("Error");
         }
     }
 
     @PostMapping(value = "/createCategory")
 
-    public ResponseEntity<?> createCategory(@RequestBody Category category){
+    public ResponseEntity<?> createCategories(@RequestBody Category category){
         try{
-            String output = categoryService.createCategory(category);
-            if (output == "Create success"){
-                return ResponseEntity.status(200).body(output);
-            }
-            return ResponseEntity.status(400).body(output);
+            return ResponseEntity.status(200).body(categoryService.createCategories(category));
         } catch (Exception ex){
-            return ResponseEntity.status(500).body("Error");
+            return ResponseEntity.status(400).body("Error");
         }
     }
 
