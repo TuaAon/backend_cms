@@ -29,27 +29,38 @@ public class TestCategoryController {
     private CategoryController categoryController;
     @Mock
     private CategoryService categoryService;
+
+    // GetMapping
     @Test
     void should_return_product_correctly_list_when_call_allCategory(){
-        // Given
-        // When
-        ResponseEntity<?> result = categoryController.getAllCategory();
-        // Then
-        assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
-    }
-
-    @Test
-    void should_return_status_200_when_call_allCategory(){
         // Given
         Category category1 = new Category("Shirt");
         Category category2 = new Category("Hat");
         List<Category> categories = Arrays.asList(category1, category2);
 
         // When
+        when(categoryService.getAllCategory()).thenReturn(categories);
         ResponseEntity<?> result = categoryController.getAllCategory();
 
+        // Then
+        assertThat(result.getBody()).isEqualTo(categories);
+    }
+
+    @Test
+    void should_return_status_200_when_call_allCategory_and_category_is_not_empty(){
+        // Given
+        // When
+        ResponseEntity<?> result = categoryController.getAllCategory();
         // Then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
+//    @Test
+//    void should_return_error_when_call_allCategory_and_category_is_empyl(){
+//        List<Category> categories = null;
+//
+//        ResponseEntity<?> result = categoryController.getAllCategory();
+//
+//
+//    }
 }
