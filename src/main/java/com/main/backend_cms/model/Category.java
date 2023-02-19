@@ -12,7 +12,6 @@ public class Category {
     @Id
     private String id;
 
-
     @Indexed(unique = true)
     private String name;
 
