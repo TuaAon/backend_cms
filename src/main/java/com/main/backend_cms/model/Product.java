@@ -13,7 +13,7 @@ public class Product {
     private String name;
     
     private Double price;
-    private int amount;
+    private Long amount;
     private String description;
     private String[] category;
     private String picture;
@@ -24,7 +24,7 @@ public class Product {
 
     public Product(String name,
                    Double price,
-                   int amount,
+                   Long amount,
                    String description,
                    String[] category,
                    String picture) {
@@ -53,11 +53,11 @@ public class Product {
         this.price = price;
     }
 
-    public int getAmount() {
+    public Long getAmount() {
         return this.amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 
