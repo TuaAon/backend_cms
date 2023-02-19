@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
@@ -60,7 +61,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_createProduct_given_product_with_negative_amount() {
         product.setAmount(-10L);
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.createProduct(product);
                 });
@@ -72,7 +73,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_createProduct_given_product_with_negative_price() {
         product.setPrice(-10.00);
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.createProduct(product);
                 });
@@ -84,7 +85,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_createProduct_given_product_with_exist_name() {
         given(productRepository.findByName(product.getName())).willReturn(Optional.of(product));
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.createProduct(product);
                 });
@@ -96,7 +97,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_createProduct_given_product_with_null_name() {
         product.setName(null);
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.createProduct(product);
                 });
@@ -108,7 +109,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_createProduct_given_product_with_null_price() {
         product.setPrice(null);
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.createProduct(product);
                 });
@@ -120,7 +121,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_createProduct_given_product_with_null_amount() {
         product.setAmount(null);
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.createProduct(product);
                 });
@@ -132,7 +133,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_createProduct_given_product_with_null_picture() {
         product.setPicture(null);
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.createProduct(product);
                 });
@@ -144,7 +145,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_createProduct_given_product_with_null_category() {
         product.setCategory(null);
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.createProduct(product);
                 });
@@ -188,7 +189,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_updateProduct_given_product_with_negative_amount() {
         product.setAmount(-10L);
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.updateProduct(product);
                 });
@@ -200,7 +201,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_updateProduct_given_product_with_negative_price() {
         product.setPrice(-10.00);
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.updateProduct(product);
                 });
@@ -212,7 +213,7 @@ public class TestProductService {
     public void should_throw_exception_when_call_updateProduct_given_product_with_exist_name() {
         given(productRepository.findByName(product.getName())).willReturn(Optional.of(product));
 
-        org.junit.jupiter.api.Assertions.assertThrows(
+        assertThrows(
                 Exception.class, () -> {
                     productService.updateProduct(product);
                 });

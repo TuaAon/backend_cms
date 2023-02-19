@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 
 @RestController
 public class ProductController {
@@ -18,9 +20,10 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping(value = "/showProducts") //Mockup for testing
-    public ResponseEntity<?> getAllProduct(){
+    public ResponseEntity<?> getAllProducts(){
         try {
-            return ResponseEntity.status(200).body(productService.getAllProducts());
+            List<Product> products = productService.getAllProducts();
+            return ResponseEntity.status(200).body(products);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("server error");
         }
