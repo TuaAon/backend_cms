@@ -24,4 +24,14 @@ public class ProductService {
         }
         throw new Exception("not ok");
     }
+
+    public String deleteProductByName(String name) throws Exception{ //hard-delete
+        //TODO: implement hard delete product by name
+        return null;
+    }
+
+    public Product updateProduct(Product product) throws Exception{
+        //TODO: implement update Product
+        return null;
+    }
 }
