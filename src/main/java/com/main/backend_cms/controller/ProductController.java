@@ -29,14 +29,9 @@ public class ProductController {
     @PostMapping(value="/createProduct")
     public ResponseEntity<?> createProduct(@RequestBody Product product) {
         try {
-            String data = productService.createProduct(product);
-            if(data.equals("Create Success")){
-                return ResponseEntity.status(200).body(data);
-            } else {
-                return ResponseEntity.status(400).body(data);
-            }
+                return ResponseEntity.status(200).body(productService.createProduct(product));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("server error");
+            return ResponseEntity.status(400).body("create failed");
         }
     }
     
