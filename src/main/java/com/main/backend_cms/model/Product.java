@@ -15,7 +15,7 @@ public class Product {
     private Double price;
     private int amount;
     private String description;
-    private String category;
+    private String[] category;
     private String picture;
 
 
@@ -26,7 +26,7 @@ public class Product {
                    Double price,
                    int amount,
                    String description,
-                   String category,
+                   String[] category,
                    String picture) {
         this.name = name;
         this.price = price;
@@ -69,11 +69,11 @@ public class Product {
         this.description = description;
     }
 
-    public String getCategory() {
+    public String[] getCategory() {
         return this.category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(String[] category) {
         this.category = category;
     }
 
