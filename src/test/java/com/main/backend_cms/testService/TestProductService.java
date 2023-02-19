@@ -190,6 +190,7 @@ public class TestProductService {
 
     @Test
     public void should_throw_exception_when_call_updateProduct_given_product_with_negative_amount() {
+        given(productRepository.findById(product.getId())).willReturn(Optional.of(product));
         product.setAmount(-10L);
 
         assertThrows(
@@ -202,6 +203,7 @@ public class TestProductService {
 
     @Test
     public void should_throw_exception_when_call_updateProduct_given_product_with_negative_price() {
+        given(productRepository.findById(product.getId())).willReturn(Optional.of(product));
         product.setPrice(-10.00);
 
         assertThrows(
@@ -214,8 +216,6 @@ public class TestProductService {
 
     @Test
     public void should_throw_exception_when_call_updateProduct_given_product_with_exist_name() {
-        given(productRepository.findByName(product.getName())).willReturn(Optional.of(product));
-
         assertThrows(
                 Exception.class, () -> {
                     productService.updateProduct(product);
@@ -226,7 +226,7 @@ public class TestProductService {
 
     @Test
     public void should_throw_exception_when_call_updateProduct_given_non_exits_product() {
-        given(productRepository.findByName(product.getName())).willReturn(null);
+        given(productRepository.findById(product.getId())).willReturn(Optional.of(product));
 
         assertThrows(
                 Exception.class, () -> {
