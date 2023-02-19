@@ -37,7 +37,7 @@ public class TestCategoryService {
     @Test
     public void should_return_category_when_call_getAllCategory_given_a_category(){
         when(categoryRepository.findAll()).thenReturn(List.of(category));
-        List<Category> categories = categoryService.getAllCategory();
+        List<Category> categories = categoryService.getAllCategories();
 
         assertThat(categories).isNotNull();
         assertThat(categories.size()).isEqualTo(1);
@@ -46,7 +46,7 @@ public class TestCategoryService {
     @Test
     public void should_return_category_when_call_createCategory_given_a_category() throws Exception {
         when(categoryRepository.save(category)).thenReturn(category);
-        Category saveCategory = categoryService.createCategory(category);
+        Category saveCategory = categoryService.createCategories(category);
 
         assertThat(saveCategory).isNotNull();
         verify(categoryRepository).save(category);
@@ -58,7 +58,7 @@ public class TestCategoryService {
 
         org.junit.jupiter.api.Assertions.assertThrows(
                 Exception.class, () -> {
-                    categoryService.createCategory(category);
+                    categoryService.createCategories(category);
                 });
 
         verify(categoryRepository, never()).save(any(Category.class));
@@ -70,7 +70,7 @@ public class TestCategoryService {
 
         org.junit.jupiter.api.Assertions.assertThrows(
                 Exception.class, () -> {
-                    categoryService.createCategory(category);
+                    categoryService.createCategories(category);
                 });
 
         verify(categoryRepository, never()).save(any(Category.class));
