@@ -25,7 +25,7 @@ public class ProductService {
         throw new Exception("not ok");
     }
 
-    public String deleteProductByName(String name) throws Exception{ //hard-delete
+    public Product deleteProductByName(String name) throws Exception{ //hard-delete
         //TODO: implement hard delete product by name
         return null;
     }
