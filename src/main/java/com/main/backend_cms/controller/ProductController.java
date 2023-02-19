@@ -1,15 +1,12 @@
 package com.main.backend_cms.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.main.backend_cms.model.Product;
 import com.main.backend_cms.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -35,6 +32,26 @@ public class ProductController {
                 return ResponseEntity.status(200).body(productService.createProduct(product));
         } catch (Exception e) {
             return ResponseEntity.status(400).body("create failed");
+        }
+    }
+
+    @PutMapping(value = "/updateProductByName")
+    public ResponseEntity<?> updateProduct(@RequestBody Product product){
+        try {
+            //TODO: implement updateProduct
+            return ResponseEntity.status(200).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(null);
+        }
+    }
+
+    @DeleteMapping(value = "/deleteProductByName")
+    public ResponseEntity<?> deleteProductByName(@RequestBody String productName){
+        try {
+            //TODO: implement deleteProduct
+            return ResponseEntity.status(200).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(null);
         }
     }
     
